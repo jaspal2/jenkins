@@ -1,4 +1,4 @@
-ode {
+node {
   def remote = [:]
   remote.name = 'test'
   remote.host = '10.0.2.15'
