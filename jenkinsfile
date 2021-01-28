@@ -1,24 +1,12 @@
-node {
-  def remote = [:]
-  remote.name = 'test'
-  remote.host = '10.0.2.15'
-  remote.user = 'monash'
-  remote.password = 'Monash2019!'
-  remote.allowAnyHosts = true
-  stage('Build') {
-          
-              sshCommand remote: remote, command: "cd /var/jenkins_home/workspace/moodle-final/moodle-docker && bin/moodle-docker-compose up -d "
+pipeline {
+        agent any
+        stages {
+            stage('Test Stage') {
+                    steps {
+                        sh 'java --version'
+                }
+            }
+        }
 
-      }
-    stage('behatinit') {
-          
-              sshCommand remote: remote, command: "cd /var/jenkins_home/workspace/moodle-final/moodle-docker && bin/moodle-docker-compose exec -T webserver php admin/tool/behat/cli/init.php"
-
-      }
-    stage('behatinit') {
-          
-              sshCommand remote: remote, command: "cd /var/jenkins_home/workspace/moodle-final/moodle-docker && bin/moodle-docker-compose exec -T webserver php admin/tool/behat/cli/run.php --tags=@moodle-upgarde"
-
-      }
 }
 
